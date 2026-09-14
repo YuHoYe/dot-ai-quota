@@ -20,16 +20,17 @@ Verified on 2026-09-14. Dot’s [Community Co-Creation](https://dot.mindreset.te
 
 ## Project description / 项目简介
 
-**English:** Dot AI Quota is a local Claude and Codex subscription-quota dashboard with an English/Chinese interface and Quote/0 Canvas output. It reuses official client sign-ins, keeps account-scoped local caches, labels missing/stale data, and updates explicitly configured content slots. It requires Node.js 24.6+ and has no npm runtime dependencies or Vibe Usage dependency.
+**English:** Dot AI Quota is a local Claude and Codex subscription-quota dashboard with a Chinese setup wizard, optional English/Chinese interface and Quote/0 Canvas output. It reuses official client sign-ins, keeps account-scoped local caches, labels missing/stale data, and updates explicitly configured content slots. It requires Node.js 24.6+ and has no npm runtime dependencies or Vibe Usage dependency.
 
-**中文：** Dot AI Quota 是一个本地运行的 Claude / Codex 订阅额度看板，提供中英文网页和 Quote/0 Canvas 输出。它复用官方客户端登录态，使用按账号隔离的本地缓存，明确标注缺失与过期数据，只更新已配置的内容槽位。需要 Node.js 24.6+，无 npm 运行依赖，也无需 Vibe Usage。
+**中文：** Dot AI Quota 是一个本地运行的 Claude / Codex 订阅额度看板，提供中文配置向导、可选的中英文网页和 Quote/0 Canvas 输出。它复用官方客户端登录态，使用按账号隔离的本地缓存，明确标注缺失与过期数据，只更新已配置的内容槽位。需要 Node.js 24.6+，无 npm 运行依赖，也无需 Vibe Usage。
 
 - Repository: https://github.com/YuHoYe/dot-ai-quota
 - License: MIT
-- English README: https://github.com/YuHoYe/dot-ai-quota/blob/main/README.md
-- 中文说明: https://github.com/YuHoYe/dot-ai-quota/blob/main/README.zh-CN.md
-- Screenshots: [English](https://img.yeyuhao.uk/dot-ai-quota/v0.1/dashboard-en.png), [简体中文](https://img.yeyuhao.uk/dot-ai-quota/v0.1/dashboard-zh-CN.png)
-- Demo: clone the repository and run `npm run demo`; no account/device required.
+- English README: https://github.com/YuHoYe/dot-ai-quota/blob/main/README.en.md
+- 中文说明: https://github.com/YuHoYe/dot-ai-quota/blob/main/README.md
+- Screenshots: [中文画板](https://img.yeyuhao.uk/dot-ai-quota/v0.2/quote0-zh-CN.png), [可选中文看板](https://img.yeyuhao.uk/dot-ai-quota/v0.2/dashboard-zh-CN.png)
+- Setup: install the GitHub package and run `dot-ai-quota setup` for the Chinese wizard; no hand-written config is required.
+- Demo: `dot-ai-quota serve --demo`; no account/device required.
 - Validation: [verification.md](verification.md).
 
 The screenshots are real captures of the local web app using demo data. They are not physical-device photographs. Existing projects already offer AI quota dashboards; this submission makes no first-of-its-kind claim. Its particular combination is a dependency-free Node runtime, bilingual local UI, Canvas output, explicit multiple slots and visible cache freshness.

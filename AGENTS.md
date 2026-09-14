@@ -5,7 +5,9 @@
 - Never log OAuth tokens, Dot keys, account identifiers or raw provider responses. Expose normalized quota fields only.
 - Missing data is unknown, never unlimited or zero. Keep fetchedAt distinct from render time; cached data is labeled.
 - The local server binds to 127.0.0.1; browser mutations need the per-process nonce and same-origin checks.
+- Use personal Git email yuhoye@gmail.com for this repository.
+- The default entry is the Chinese setup wizard; the web dashboard is optional. Store user config outside the package under ~/.dot-ai-quota. Never echo setup secrets.
 - Dot writes require explicit configured serial + taskKey. Demo mode must never read credentials or push.
-- Keep README.md and README.zh-CN.md equivalent. Screenshots must be from the running app with labeled demo data.
+- README.md is Chinese-first; keep README.en.md equivalent. README.zh-CN.md redirects to README.md. Screenshots must be from the running app with labeled demo data.
 - Before delivery run `npm test`, exercise the demo UI, and review credential leaks, stale/missing data, scheduling, failed API responses and screenshot claims.
 - Do not change another repository's device slots or launchd jobs.

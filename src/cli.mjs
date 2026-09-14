@@ -1,29 +1,58 @@
 #!/usr/bin/env node
+import fs from "node:fs";
 import { loadConfig, log } from "./config.mjs";
 import { collect } from "./collector.mjs";
 import { demoSnapshot } from "./model.mjs";
 import { canvasPayload } from "./canvas.mjs";
 import { dotRequest, pushSnapshot } from "./dot.mjs";
 import { createServer } from "./server.mjs";
+import { setup, devicesFromResponse, slotsFromResponse } from "./setup.mjs";
+import { manageSchedule } from "./scheduler.mjs";
 
-const [command = "serve", ...args] = process.argv.slice(2);
+const [command = "setup", ...args] = process.argv.slice(2);
 const demo = args.includes("--demo");
-const help = `Dot AI Quota\n\n  npm start                         Local dashboard at http://127.0.0.1:4317\n  npm run demo                      Demo UI; no credentials or network queries\n  npm run check                     Print normalized quota JSON\n  npm run cli -- devices            List your Dot devices\n  npm run cli -- slots SERIAL       List existing content slots\n  npm run push -- --dry-run         Preview Canvas JSON without sending\n  npm run push                      Update configured Dot content slots\n  npm run push -- --refresh-now     Update and immediately refresh the screen\n  npm run watch                     Query + push every configured interval\n\nConfiguration: config.json + .env (see README). Ctrl+C stops serve/watch.\n`;
+const help = `Dot AI Quota
+
+  dot-ai-quota setup                   中文配置向导（默认）
+  dot-ai-quota push                    手动更新 Dot
+  dot-ai-quota service status          查看定时任务
+  dot-ai-quota service uninstall       停止定时更新
+  dot-ai-quota service install         安装定时任务
+  dot-ai-quota check                   检查账号额度
+  dot-ai-quota devices                 列出设备
+  dot-ai-quota slots SERIAL            列出画板
+  dot-ai-quota watch                   前台循环推送
+  dot-ai-quota serve                   可选网页看板
+  dot-ai-quota serve --demo            中文演示，不访问账号和设备
+
+配置由向导保存在 ~/.dot-ai-quota/，无需手工编辑文件。
+AI 非交互配置：setup --non-interactive --yes --key-file PATH --device SERIAL --slot KEY [--background]
+`;
 
 async function main() {
   if (["help", "--help", "-h"].includes(command))
     return process.stdout.write(help);
   if (
-    !["serve", "check", "devices", "slots", "push", "watch"].includes(command)
+    ![
+      "setup",
+      "service",
+      "serve",
+      "check",
+      "devices",
+      "slots",
+      "push",
+      "watch",
+    ].includes(command)
   )
     throw new Error("Unknown command. Run npm run cli -- help.");
   if (demo && !["serve", "check"].includes(command))
     throw new Error(
       "--demo is only supported by serve and check; it never pushes.",
     );
+  if (command === "setup") return setup(args);
   const config = demo
     ? {
-        language: "en",
+        language: args.includes("--en") ? "en" : "zh-CN",
         timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         port: 4317,
         intervalMinutes: 30,
@@ -31,6 +60,15 @@ async function main() {
         devices: [],
       }
     : loadConfig();
+  if (command === "service") {
+    if (
+      args[0] === "install" &&
+      (!config.devices.length || !process.env.DOT_API_KEY)
+    )
+      throw new Error("请先运行 dot-ai-quota setup 完成配置。");
+    console.log(manageSchedule(args[0] || "status", config));
+    return;
+  }
   if (command === "serve") {
     const server = createServer(config, { demo });
     server.on("error", (error) => {
@@ -46,13 +84,24 @@ async function main() {
     return;
   }
   if (command === "devices")
-    return console.log(JSON.stringify(await dotRequest("/devices"), null, 2));
+    return console.log(
+      JSON.stringify(
+        devicesFromResponse(await dotRequest("/devices", readKeyOptions(args))),
+        null,
+        2,
+      ),
+    );
   if (command === "slots") {
     if (!/^[A-Za-z0-9_-]+$/.test(args[0] || ""))
       throw new Error("Usage: npm run cli -- slots SERIAL");
     return console.log(
       JSON.stringify(
-        await dotRequest(`/device/${encodeURIComponent(args[0])}/loop/list`),
+        slotsFromResponse(
+          await dotRequest(
+            `/device/${encodeURIComponent(args[0])}/loop/list`,
+            readKeyOptions(args),
+          ),
+        ),
         null,
         2,
       ),
@@ -107,6 +156,17 @@ async function main() {
         timer = setTimeout(resolve, config.intervalMinutes * 60_000);
       });
   }
+}
+
+function readKeyOptions(args) {
+  const index = args.indexOf("--key-file");
+  if (index < 0) return {};
+  if (!args[index + 1] || args[index + 1].startsWith("--"))
+    throw new Error("--key-file 后需要本机密钥文件路径。");
+  const key = fs.readFileSync(args[index + 1], "utf8").trim();
+  if (!/^[A-Za-z0-9._~+\/=:-]+$/.test(key))
+    throw new Error("密钥文件格式不正确。");
+  return { key };
 }
 
 main().catch((error) => {

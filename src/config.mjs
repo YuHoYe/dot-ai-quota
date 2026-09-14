@@ -2,13 +2,19 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-export function loadConfig(
-  file = process.env.DOT_QUOTA_CONFIG || "config.json",
-) {
+export const stateDir = () =>
+  process.env.DOT_QUOTA_STATE_DIR || path.join(os.homedir(), ".dot-ai-quota");
+export const configPath = () =>
+  path.resolve(
+    process.env.DOT_QUOTA_CONFIG || path.join(stateDir(), "config.json"),
+  );
+export const envPath = () => path.join(path.dirname(configPath()), ".env");
+
+export function loadConfig(file = configPath()) {
   let input = {};
   if (fs.existsSync(file)) input = JSON.parse(fs.readFileSync(file, "utf8"));
   const config = {
-    language: "en",
+    language: "zh-CN",
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     port: 4317,
     intervalMinutes: 30,
@@ -54,8 +60,6 @@ export function loadConfig(
   return config;
 }
 
-export const stateDir = () =>
-  process.env.DOT_QUOTA_STATE_DIR || path.join(os.homedir(), ".dot-ai-quota");
 export function log(event, fields = {}) {
   process.stderr.write(
     `${JSON.stringify({ timestamp: new Date().toISOString(), event, ...fields })}\n`,

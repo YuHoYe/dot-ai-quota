@@ -31,16 +31,25 @@ try {
   );
   assert.equal(await page.locator("#push").isDisabled(), true);
   assert.equal(await page.locator(".provider-card").count(), 2);
-  await page.screenshot({ path: `${output}dashboard-en.png`, fullPage: true });
-  await page.locator("#refresh").click();
-  await page.locator("#notice").waitFor({ state: "visible" });
-  await page.locator("#language").click();
-  await page.waitForFunction(() => document.documentElement.lang === "zh-CN");
-  await page.locator("#notice").waitFor({ state: "hidden" });
+  if ((await page.locator("html").getAttribute("lang")) !== "zh-CN")
+    await page.locator("#language").click();
   await page.screenshot({
     path: `${output}dashboard-zh-CN.png`,
     fullPage: true,
   });
+  await page
+    .locator(".device-shell")
+    .screenshot({ path: `${output}quote0-zh-CN.png` });
+  await page.locator("#refresh").click();
+  await page.locator("#notice").waitFor({ state: "visible" });
+  await page.locator("#language").click();
+  await page.waitForFunction(() => document.documentElement.lang === "en");
+  await page.locator("#notice").waitFor({ state: "hidden" });
+  await page.screenshot({
+    path: `${output}dashboard-en.png`,
+    fullPage: true,
+  });
+  await page.locator("#language").click();
   for (const width of [390, 768]) {
     await page.setViewportSize({ width, height: 844 });
     assert.equal(

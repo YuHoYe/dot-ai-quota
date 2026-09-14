@@ -1,11 +1,11 @@
 # Verification / 验证记录
 
-Date: 2026-09-14. Initial implementation, Node.js 24.18.0 on macOS.
+Date: 2026-09-14. v0.2 setup-wizard update, Node.js 24.18.0 on macOS.
 
 ## Verified locally
 
-- `npm test`: 16 passing tests. No real accounts or device writes are required by the suite.
-- Initial GitHub CI: all three Node 24 jobs (Ubuntu, macOS, Windows) passed in [run 34799279311](https://github.com/YuHoYe/dot-ai-quota/actions/runs/34799279311).
+- `npm test`: 29 passing tests. No real accounts or device writes are required by the suite.
+- Remote CI runs the suite on Node 24 / Ubuntu, macOS and Windows; see the latest [workflow run](https://github.com/YuHoYe/dot-ai-quota/actions/workflows/test.yml).
 - Real Claude Code `get_usage` probe: returned subscription plan, five-hour, weekly and scoped quota data.
 - Real Codex usage query: returned subscription plan, weekly quota and reset-credit count. The missing five-hour window remained unknown.
 - Demo dashboard: actual Chrome rendering, English/Chinese switch, refresh feedback, disabled demo push, desktop and 390px/768px layouts, no browser JavaScript errors.
@@ -14,10 +14,15 @@ Date: 2026-09-14. Initial implementation, Node.js 24.18.0 on macOS.
 - Loopback server tests cover Host/Origin rejection, nonce requirements, unknown paths and query coalescing/debounce.
 - Cache tests cover account isolation, original data timestamp, expiry and no fallback after a rejected Codex login.
 
+- Setup workflow tests cover hidden secret input, cancellation, automatic provider detection, exact device/Canvas selection, retry configuration, refusal on wrong readback, non-interactive local key files, preserving other targets/proxy settings, and scheduler failure recovery.
+- `npm pack` followed by a temporary global npm install: the installed `dot-ai-quota` binary ran successfully without runtime dependencies. The package contains the Chinese/English READMEs and excludes private config and secrets.
+- Isolated macOS launchd test: registered a separate temporary no-op job, read back the 1800-second interval, then removed it. No real Dot push or production scheduler was involved.
+- The Chinese card screenshot and optional dashboard screenshot were regenerated from the actual v0.2 demo; the display card now defaults to Chinese.
+
 ## Limits of this verification
 
 - This new repository has **not yet been pushed to a physical Quote/0 for acceptance testing**. Transport behavior is tested with a fake HTTP transport, and the browser preview uses approximate fonts. Existing unrelated device slots and scheduled jobs were not modified during implementation.
-- The macOS launchd installer is provided but was not installed into the developer’s live device schedule. Linux/Windows live account authentication has not been manually tested.
+- The production schedule was not installed or replaced. Linux/Windows scheduler plans and command behavior are tested with fixtures; real OS registration and live account authentication on those platforms still need manual acceptance.
 - No build is required; the application runs directly from ESM source.
 - The GitHub workflow tests Node 24 on Linux, macOS and Windows. Check its latest run for remote CI results; local success alone is not remote CI evidence.
 - Provider interfaces are client-internal and can change. This does not certify arbitrary subscription types, custom gateways, keyring-only Codex auth or future client versions.
