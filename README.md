@@ -6,7 +6,7 @@ A local dashboard that reads your existing Claude Code / Codex sign-ins and send
 
 **English** · [简体中文](README.zh-CN.md)
 
-![Dot AI Quota local dashboard with Claude, Codex and a Quote/0 preview](docs/images/dashboard-en.png)
+![Dot AI Quota local dashboard with Claude, Codex and a Quote/0 preview](https://img.yeyuhao.uk/dot-ai-quota/v0.1/dashboard-en.png)
 
 *Screenshot of the running application in demo mode. All numbers are sample data. The embedded e-ink view is a browser approximation, not a photo of a physical device.*
 

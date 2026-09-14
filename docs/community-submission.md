@@ -28,7 +28,7 @@ Verified on 2026-09-14. Dot’s [Community Co-Creation](https://dot.mindreset.te
 - License: MIT
 - English README: https://github.com/YuHoYe/dot-ai-quota/blob/main/README.md
 - 中文说明: https://github.com/YuHoYe/dot-ai-quota/blob/main/README.zh-CN.md
-- Screenshots: [`images/dashboard-en.png`](images/dashboard-en.png), [`images/dashboard-zh-CN.png`](images/dashboard-zh-CN.png)
+- Screenshots: [English](https://img.yeyuhao.uk/dot-ai-quota/v0.1/dashboard-en.png), [简体中文](https://img.yeyuhao.uk/dot-ai-quota/v0.1/dashboard-zh-CN.png)
 - Demo: clone the repository and run `npm run demo`; no account/device required.
 - Validation: [verification.md](verification.md).
 

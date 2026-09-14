@@ -6,7 +6,7 @@
 
 [English](README.md) · **简体中文**
 
-![Dot AI Quota 中文界面：Claude、Codex 额度和 Quote/0 预览](docs/images/dashboard-zh-CN.png)
+![Dot AI Quota 中文界面：Claude、Codex 额度和 Quote/0 预览](https://img.yeyuhao.uk/dot-ai-quota/v0.1/dashboard-zh-CN.png)
 
 *截图来自实际运行的应用演示模式，数值均为示例。右侧墨水屏为浏览器近似预览，不是实体设备照片。*
 
