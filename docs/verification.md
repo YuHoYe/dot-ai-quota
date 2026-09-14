@@ -16,6 +16,7 @@ Date: 2026-09-14. v0.2 setup-wizard update, Node.js 24.18.0 on macOS.
 
 - Setup workflow tests cover hidden secret input, cancellation, automatic provider detection, exact device/Canvas selection, retry configuration, refusal on wrong readback, non-interactive local key files, preserving other targets/proxy settings, and scheduler failure recovery.
 - `npm pack` followed by a temporary global npm install: the installed `dot-ai-quota` binary ran successfully without runtime dependencies. The package contains the Chinese/English READMEs and excludes private config and secrets.
+- The public GitHub main tarball was also installed into a temporary global prefix: version 0.2.0 and the executable Chinese CLI were verified. All 29 tests passed in all three [v0.2 CI jobs](https://github.com/YuHoYe/dot-ai-quota/actions/runs/34802674503).
 - Isolated macOS launchd test: registered a separate temporary no-op job, read back the 1800-second interval, then removed it. No real Dot push or production scheduler was involved.
 - The Chinese card screenshot and optional dashboard screenshot were regenerated from the actual v0.2 demo; the display card now defaults to Chinese.
 
