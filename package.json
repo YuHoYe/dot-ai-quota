@@ -1,0 +1,20 @@
+{
+  "name": "dot-ai-quota",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A local Claude and Codex quota dashboard for Dot Quote/0. No Vibe Usage required.",
+  "type": "module",
+  "engines": {
+    "node": ">=24.6.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "node --use-env-proxy --env-file-if-exists=.env src/cli.mjs serve",
+    "demo": "node src/cli.mjs serve --demo",
+    "check": "node --use-env-proxy --env-file-if-exists=.env src/cli.mjs check",
+    "push": "node --use-env-proxy --env-file-if-exists=.env src/cli.mjs push",
+    "watch": "node --use-env-proxy --env-file-if-exists=.env src/cli.mjs watch",
+    "test": "node --test",
+    "cli": "node --use-env-proxy --env-file-if-exists=.env src/cli.mjs"
+  }
+}

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Dot AI Quota</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23274237'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23e4ecce'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Dot AI Quota home"
+          ><span class="brand-mark"><i></i></span
+          ><span>Dot <b>AI Quota</b></span
+          ><span class="version">v0.1</span></a
+        >
+        <div class="top-actions">
+          <span class="local-badge"
+            ><i></i><span data-i18n="local">On your machine</span></span
+          ><button
+            id="language"
+            class="language"
+            type="button"
+            aria-label="Switch language"
+          >
+            中文
+          </button>
+        </div>
+      </header>
+      <main>
+        <div id="demo-banner" class="demo-banner" hidden>
+          <span class="demo-tag">DEMO</span
+          ><span data-i18n="demoNotice"
+            >Sample data. Explore the dashboard without connecting an account or
+            device.</span
+          >
+        </div>
+        <section class="intro">
+          <div>
+            <p class="eyebrow" data-i18n="eyebrow">
+              A LITTLE CLARITY FOR YOUR WORKDAY
+            </p>
+            <h1 data-i18n="title">Your AI, at a glance.</h1>
+            <p class="subtitle" data-i18n="subtitle">
+              Know what’s left. See when it resets. Keep it on your desk.
+            </p>
+          </div>
+          <button class="button refresh" id="refresh" type="button">
+            <span aria-hidden="true">↻</span
+            ><span data-i18n="refresh">Refresh usage</span>
+          </button>
+        </section>
+        <div class="workspace">
+          <section class="usage-section" aria-labelledby="usage-heading">
+            <div class="section-heading">
+              <h2 id="usage-heading" data-i18n="subscriptions">
+                SUBSCRIPTIONS
+              </h2>
+              <span
+                id="connection-state"
+                class="muted"
+                aria-live="polite"
+              ></span>
+            </div>
+            <div id="providers" class="providers" aria-live="polite">
+              <div class="loading" data-i18n="loading">Reading your quota…</div>
+            </div>
+            <div class="insight">
+              <span class="insight-icon" aria-hidden="true">i</span>
+              <p data-i18n="quotaNote">
+                These percentages reflect your subscription limits, not token
+                counts or API spending.
+              </p>
+            </div>
+          </section>
+          <aside class="device-section" aria-labelledby="device-heading">
+            <div class="section-heading">
+              <h2 id="device-heading" data-i18n="deskDisplay">ON YOUR DESK</h2>
+              <span class="muted">QUOTE/0</span>
+            </div>
+            <div class="device-card">
+              <div class="device-top">
+                <span class="device-label" data-i18n="inkPreview"
+                  >E-ink preview</span
+                ><span class="small-tag">296 × 152</span>
+              </div>
+              <div class="device-shell">
+                <div
+                  id="screen"
+                  class="screen"
+                  aria-label="Approximate Dot Canvas preview"
+                ></div>
+                <div class="device-brand">Quote/0 <span>by Dot.</span></div>
+              </div>
+              <p class="preview-caption" data-i18n="previewNote">
+                Browser preview · device fonts may differ
+              </p>
+              <div class="device-detail">
+                <span data-i18n="destination">Destination</span
+                ><strong id="destination">—</strong>
+              </div>
+              <div class="device-detail">
+                <span data-i18n="delivery">Delivery</span
+                ><strong data-i18n="deliveryValue"
+                  >Update content, keep rotation</strong
+                >
+              </div>
+              <button id="push" class="button push" type="button" disabled>
+                <span data-i18n="push">Send to Dot</span
+                ><span aria-hidden="true">↗</span>
+              </button>
+              <p id="setup-note" class="setup-note"></p>
+            </div>
+            <div class="quiet-card">
+              <span class="quiet-symbol" aria-hidden="true">◌</span>
+              <div>
+                <h3 data-i18n="quietTitle">A quieter way to check.</h3>
+                <p data-i18n="quietBody">
+                  Your limits, on a small screen. One less reason to open
+                  another tab.
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+        <footer>
+          <span
+            ><i></i
+            ><span data-i18n="privacy"
+              >Local queries. No analytics. No Vibe Usage.</span
+            ></span
+          ><span id="updated"></span>
+        </footer>
+        <div id="notice" class="notice" role="status" hidden></div>
+      </main>
+    </div>
+  </body>
+</html>

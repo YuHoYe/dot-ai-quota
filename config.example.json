@@ -1,0 +1,8 @@
+{
+  "language": "en",
+  "timeZone": "Asia/Shanghai",
+  "port": 4317,
+  "intervalMinutes": 30,
+  "providers": ["claude", "codex"],
+  "devices": []
+}
