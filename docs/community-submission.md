@@ -2,6 +2,10 @@
 
 Verified on 2026-09-14. Dot’s [Community Co-Creation](https://dot.mindreset.tech/docs/service/co_create) lists standalone repositories; it does not require a special plugin bundle. This project is a local Node.js application using the Canvas API.
 
+**Submitted:** [MindReset/dot_web_docs PR #4](https://github.com/MindReset/dot_web_docs/pull/4), with English, Simplified Chinese and Japanese introduction pages. Pending maintainer review; not yet an official listing. No duplicate issue, email or community message was sent.
+
+**已提交：** 官方文档仓库 [PR #4](https://github.com/MindReset/dot_web_docs/pull/4)，包含中、英、日三语言介绍页。等待维护者审核，不代表官网已经收录。没有同时发送重复 Issue、邮件或群消息。
+
 ## Submission routes / 申请渠道
 
 | Route | Use and evidence |

@@ -5,6 +5,7 @@ Date: 2026-09-14. Initial implementation, Node.js 24.18.0 on macOS.
 ## Verified locally
 
 - `npm test`: 16 passing tests. No real accounts or device writes are required by the suite.
+- Initial GitHub CI: all three Node 24 jobs (Ubuntu, macOS, Windows) passed in [run 34799279311](https://github.com/YuHoYe/dot-ai-quota/actions/runs/34799279311).
 - Real Claude Code `get_usage` probe: returned subscription plan, five-hour, weekly and scoped quota data.
 - Real Codex usage query: returned subscription plan, weekly quota and reset-credit count. The missing five-hour window remained unknown.
 - Demo dashboard: actual Chrome rendering, English/Chinese switch, refresh feedback, disabled demo push, desktop and 390px/768px layouts, no browser JavaScript errors.
